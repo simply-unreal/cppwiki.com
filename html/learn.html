@@ -6,7 +6,7 @@
 
     <title>Learn - cppwiki</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -46,7 +46,7 @@
                 document.getElementById("chapters");
 
             try {
-                const response = await fetch("../json/learn.json");
+                const response = await fetch("json/learn.json");
 
                 if (!response.ok) {
                     throw new Error("Could not load learn.json");

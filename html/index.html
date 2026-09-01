@@ -11,7 +11,7 @@
         content="The C++ knowledge database."
     >
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -134,11 +134,11 @@
                 loadPromise = (async () => {
                     try {
                         const [learnRes, refRes] = await Promise.all([
-                            fetch('../json/learn.json').catch(e => {
+                            fetch('json/learn.json').catch(e => {
                                 console.error('Error loading learn.json:', e);
                                 return { ok: false };
                             }),
-                            fetch('../json/references.json').catch(e => {
+                            fetch('json/references.json').catch(e => {
                                 console.error('Error loading references.json:', e);
                                 return { ok: false };
                             })
@@ -303,20 +303,17 @@
                 }
             }
 
-            // Form submission
             searchForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const query = searchInput.value;
                 performSearch(query, true);
             });
 
-            // Back button
             backButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 showHomeView(true);
             });
 
-            // Site logo click resets to home view if in search mode
             siteLogo.addEventListener('click', (e) => {
                 if (resultsContainer.style.display === 'block') {
                     e.preventDefault();
@@ -324,7 +321,6 @@
                 }
             });
 
-            // Handle browser back/forward buttons
             window.addEventListener('popstate', (e) => {
                 const params = new URLSearchParams(window.location.search);
                 const q = params.get('q');
@@ -336,7 +332,6 @@
                 }
             });
 
-            // Preload data & check initial URL params
             loadData();
             const params = new URLSearchParams(window.location.search);
             const initialQuery = params.get('q');

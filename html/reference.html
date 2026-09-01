@@ -6,7 +6,7 @@
 
     <title>Reference - cppwiki</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     
     <style>
         body {
@@ -154,7 +154,7 @@
             let referenceData = [];
 
             // Fetch references JSON on load
-            fetch('../json/references.json')
+            fetch('json/references.json')
                 .then(response => response.json())
                 .then(data => {
                     referenceData = data;

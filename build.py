@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent
 
 CONTENT_DIR = ROOT / "html" / "content"
 HTML_DIR = ROOT / "html"
-CSS_FILE = ROOT / "css" / "style.css"
+CSS_FILE = ROOT / "html" / "css" / "style.css"
 
 
 LANGUAGE_NAMES = {
@@ -270,7 +270,7 @@ def make_header(source):
                     name="q"
                     placeholder="Search cppwiki"
                     autocomplete="off"
-                >
+                />
 
             </div>
 
