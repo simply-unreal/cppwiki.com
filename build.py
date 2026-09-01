@@ -16,7 +16,7 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parent
 
-CONTENT_DIR = ROOT / "content"
+CONTENT_DIR = ROOT / "html" / "content"
 HTML_DIR = ROOT / "html"
 CSS_FILE = ROOT / "css" / "style.css"
 
