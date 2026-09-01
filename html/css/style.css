@@ -1469,3 +1469,12 @@ button {
         padding: 13px;
     }
 }
+
+.search-input-wrapper input:focus {
+    outline: none;
+}
+
+.search-input-wrapper:focus-within {
+    border-color: var(--border);
+    box-shadow: none;
+}
