@@ -127,7 +127,7 @@ def get_title(metadata, markdown_text, fallback):
 
 
 def get_page_title(metadata, markdown_text, fallback):
-    return "Learn - cppwiki"
+    return f"{get_title(metadata, markdown_text, fallback)} - cppwiki"
 
 
 def get_metadata_html(metadata):
@@ -252,7 +252,7 @@ def make_header(source):
             cppwiki
         </a>
 
-        <form class="search-form">
+        <form class="search-form" action="{home_url}" method="get">
 
             <label class="sr-only" for="search">
                 Search cppwiki
@@ -297,6 +297,18 @@ def is_learn_item(source):
     return relative.parts[0].lower() == "learn" and relative.parts[
         1
     ].lower().startswith("chapter")
+
+
+def is_reference_item(source):
+    try:
+        relative = source.relative_to(CONTENT_DIR)
+    except ValueError:
+        return False
+
+    if len(relative.parts) < 2:
+        return False
+
+    return relative.parts[0].lower() == "references"
 
 
 def build_page(source):
@@ -355,6 +367,13 @@ def build_page(source):
 
         page.append(f'        <a class="back-button" href="{learn_url}">')
         page.append("            ← Back to Learn")
+        page.append("        </a>")
+        page.append("")
+    elif is_reference_item(source):
+        ref_url = relative_url(source, HTML_DIR / "reference.html")
+
+        page.append(f'        <a class="back-button" href="{ref_url}">')
+        page.append("            ← Back to Reference")
         page.append("        </a>")
         page.append("")
 

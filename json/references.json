@@ -1,3 +1,7 @@
-{
-    
-}
+[
+    {
+        "title": "auto",
+        "description": "Specifies that the type of the variable that is being declared will be automatically deduced from its initializer.",
+        "url": "../content/references/auto/auto.html"
+    }
+]

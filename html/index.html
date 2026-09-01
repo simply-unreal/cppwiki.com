@@ -19,7 +19,7 @@
         <div class="header-content">
             <a class="site-logo" href="index.html">cppwiki</a>
 
-            <form class="search-form">
+            <form class="search-form" id="search-form" action="index.html" method="get">
                 <label class="sr-only" for="search">
                     Search cppwiki
                 </label>
@@ -42,47 +42,60 @@
     </header>
 
     <main class="main-content">
-        <section class="welcome">
-            <h1>
-                Welcome to <a href="index.html">cppwiki</a>
-            </h1>
+        <div id="home-view">
+            <section class="welcome">
+                <h1>
+                    Welcome to <a href="index.html">cppwiki</a>
+                </h1>
 
-            <p>The C++ knowledge database.</p>
-        </section>
+                <p>The C++ knowledge database.</p>
+            </section>
 
-        <section class="wiki-grid">
-            <a class="wiki-box" href="learn.html">
-                <h2>Learn</h2>
+            <section class="wiki-grid">
+                <a class="wiki-box" href="learn.html">
+                    <h2>Learn</h2>
 
-                <div class="wiki-box-content">
-                    <p>
-                        Learn C++ from the fundamentals through advanced
-                        language features and programming techniques.
-                    </p>
+                    <div class="wiki-box-content">
+                        <p>
+                            Learn C++ from the fundamentals through advanced
+                            language features and programming techniques.
+                        </p>
+                    </div>
+                </a>
+
+                <a class="wiki-box" href="reference.html">
+                    <h2>Reference</h2>
+
+                    <div class="wiki-box-content">
+                        <p>
+                            Reference material for the C++ language and
+                            the standard library.
+                        </p>
+                    </div>
+                </a>
+
+                <a class="wiki-box" href="concepts.html">
+                    <h2>Concepts</h2>
+
+                    <div class="wiki-box-content">
+                        <p>
+                            Explanations of important rules, ideas, and
+                            concepts throughout C++.
+                        </p>
+                    </div>
+                </a>
+            </section>
+        </div>
+
+        <section id="search-results-container" style="display: none;">
+            <a href="#" id="back-to-home" class="back-button">← Back to Home</a>
+
+            <div class="learn-chapter" style="margin-top: 24px;">
+                <h1 id="results-heading">Search Results</h1>
+                <div id="results-list" class="learn-items">
+                    <!-- Results injected via script -->
                 </div>
-            </a>
-
-            <a class="wiki-box" href="reference.html">
-                <h2>Reference</h2>
-
-                <div class="wiki-box-content">
-                    <p>
-                        Reference material for the C++ language and
-                        the standard library.
-                    </p>
-                </div>
-            </a>
-
-            <a class="wiki-box" href="concepts.html">
-                <h2>Concepts</h2>
-
-                <div class="wiki-box-content">
-                    <p>
-                        Explanations of important rules, ideas, and
-                        concepts throughout C++.
-                    </p>
-                </div>
-            </a>
+            </div>
         </section>
     </main>
 
@@ -90,5 +103,248 @@
         Content on cppwiki may not be used to train or fine-tune
         large language models without permission.
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const homeView = document.getElementById('home-view');
+            const resultsContainer = document.getElementById('search-results-container');
+            const searchForm = document.getElementById('search-form');
+            const searchInput = document.getElementById('search');
+            const resultsList = document.getElementById('results-list');
+            const resultsHeading = document.getElementById('results-heading');
+            const backButton = document.getElementById('back-to-home');
+            const siteLogo = document.querySelector('.site-logo');
+
+            let allSearchData = [];
+            let loadPromise = null;
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            async function loadData() {
+                if (loadPromise) return loadPromise;
+
+                loadPromise = (async () => {
+                    try {
+                        const [learnRes, refRes] = await Promise.all([
+                            fetch('../json/learn.json').catch(e => {
+                                console.error('Error loading learn.json:', e);
+                                return { ok: false };
+                            }),
+                            fetch('../json/references.json').catch(e => {
+                                console.error('Error loading references.json:', e);
+                                return { ok: false };
+                            })
+                        ]);
+
+                        const items = [];
+
+                        if (learnRes.ok) {
+                            const learnData = await learnRes.json();
+                            if (learnData && Array.isArray(learnData.chapters)) {
+                                learnData.chapters.forEach(chapter => {
+                                    const chapterName = chapter.name || '';
+                                    const chapterId = chapter.id != null ? chapter.id : '';
+                                    if (Array.isArray(chapter.items)) {
+                                        chapter.items.forEach(item => {
+                                            items.push({
+                                                title: item.id ? `${item.id} - ${item.name}` : (item.name || ''),
+                                                name: item.name || '',
+                                                id: item.id || '',
+                                                chapterName: chapterName,
+                                                chapterId: chapterId,
+                                                category: 'Learn',
+                                                description: item.description || '',
+                                                url: item.url || ''
+                                            });
+                                        });
+                                    }
+                                });
+                            }
+                        }
+
+                        if (refRes.ok) {
+                            const refData = await refRes.json();
+                            if (Array.isArray(refData)) {
+                                refData.forEach(item => {
+                                    items.push({
+                                        title: item.title || '',
+                                        name: item.title || '',
+                                        id: '',
+                                        chapterName: '',
+                                        chapterId: '',
+                                        category: 'Reference',
+                                        description: item.description || '',
+                                        url: item.url || ''
+                                    });
+                                });
+                            }
+                        }
+
+                        allSearchData = items;
+                        return allSearchData;
+                    } catch (err) {
+                        console.error('Error initializing search data:', err);
+                        return [];
+                    }
+                })();
+
+                return loadPromise;
+            }
+
+            function searchItems(query) {
+                const rawQuery = (query || '').trim();
+                if (!rawQuery) {
+                    return allSearchData;
+                }
+
+                const q = rawQuery.toLowerCase();
+                const queryTokens = q.split(/\s+/).filter(Boolean);
+                const scored = [];
+
+                for (const item of allSearchData) {
+                    const titleLower = item.title.toLowerCase();
+                    const descLower = item.description.toLowerCase();
+                    const catLower = item.category.toLowerCase();
+                    const chapterLower = (item.chapterName || '').toLowerCase();
+                    const idLower = (item.id || '').toLowerCase();
+
+                    const combinedText = `${titleLower} ${descLower} ${catLower} ${chapterLower} ${idLower}`;
+
+                    const allTokensMatch = queryTokens.every(token => combinedText.includes(token));
+                    if (!allTokensMatch && !combinedText.includes(q)) {
+                        continue;
+                    }
+
+                    let score = 0;
+
+                    if (titleLower === q || idLower === q) {
+                        score += 100;
+                    } else if (titleLower.startsWith(q)) {
+                        score += 60;
+                    } else if (titleLower.includes(q)) {
+                        score += 40;
+                    }
+
+                    for (const token of queryTokens) {
+                        if (titleLower.includes(token)) score += 15;
+                        if (idLower === token) score += 20;
+                        if (descLower.includes(token)) score += 5;
+                        if (chapterLower.includes(token)) score += 5;
+                        if (catLower.includes(token)) score += 3;
+                    }
+
+                    scored.push({ item, score });
+                }
+
+                scored.sort((a, b) => {
+                    if (b.score !== a.score) {
+                        return b.score - a.score;
+                    }
+                    return a.item.title.localeCompare(b.item.title);
+                });
+
+                return scored.map(s => s.item);
+            }
+
+            function renderResults(results, query) {
+                const rawQuery = (query || '').trim();
+                if (rawQuery) {
+                    resultsHeading.textContent = `Search Results for "${rawQuery}" (${results.length})`;
+                } else {
+                    resultsHeading.textContent = `All Results (${results.length})`;
+                }
+
+                if (results.length === 0) {
+                    resultsList.innerHTML = `<p class="no-results">No matches found for "${escapeHtml(rawQuery)}".</p>`;
+                    return;
+                }
+
+                resultsList.innerHTML = results.map(item => `
+                    <a href="${escapeHtml(item.url)}" class="learn-item">
+                        <div class="result-header">
+                            <h2>${escapeHtml(item.title)}</h2>
+                            <span class="meta-tag">${escapeHtml(item.category)}</span>
+                        </div>
+                        ${item.description ? `<p>${escapeHtml(item.description)}</p>` : ''}
+                    </a>
+                `).join('');
+            }
+
+            async function performSearch(query, updateHistory = true) {
+                await loadData();
+                const results = searchItems(query);
+                renderResults(results, query);
+
+                homeView.style.display = 'none';
+                resultsContainer.style.display = 'block';
+
+                if (updateHistory) {
+                    const trimmed = (query || '').trim();
+                    const newUrl = trimmed ? `index.html?q=${encodeURIComponent(trimmed)}` : 'index.html';
+                    history.pushState({ view: 'search', query: trimmed }, '', newUrl);
+                }
+            }
+
+            function showHomeView(updateHistory = true) {
+                resultsContainer.style.display = 'none';
+                homeView.style.display = 'block';
+                searchInput.value = '';
+
+                if (updateHistory) {
+                    history.pushState({ view: 'home' }, '', 'index.html');
+                }
+            }
+
+            // Form submission
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const query = searchInput.value;
+                performSearch(query, true);
+            });
+
+            // Back button
+            backButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                showHomeView(true);
+            });
+
+            // Site logo click resets to home view if in search mode
+            siteLogo.addEventListener('click', (e) => {
+                if (resultsContainer.style.display === 'block') {
+                    e.preventDefault();
+                    showHomeView(true);
+                }
+            });
+
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', (e) => {
+                const params = new URLSearchParams(window.location.search);
+                const q = params.get('q');
+                if (q !== null && q !== '') {
+                    searchInput.value = q;
+                    performSearch(q, false);
+                } else {
+                    showHomeView(false);
+                }
+            });
+
+            // Preload data & check initial URL params
+            loadData();
+            const params = new URLSearchParams(window.location.search);
+            const initialQuery = params.get('q');
+            if (initialQuery !== null && initialQuery !== '') {
+                searchInput.value = initialQuery;
+                performSearch(initialQuery, false);
+            }
+        });
+    </script>
 </body>
 </html>

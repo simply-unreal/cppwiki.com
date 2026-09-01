@@ -7,6 +7,64 @@
     <title>Reference - cppwiki</title>
 
     <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        body {
+            background: #17191a;
+        }
+
+        /* Styles for search results view */
+        #search-results-container {
+            display: none;
+            margin-top: 34px;
+        }
+
+        .results-list {
+            margin-top: 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .result-item {
+            display: block;
+            padding: 16px 18px;
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-dark);
+            background: var(--surface);
+            transition: background 0.15s ease;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-item:hover {
+            background: var(--surface-raised);
+            text-decoration: none;
+        }
+
+        .result-item h3 {
+            margin: 0;
+            color: var(--link);
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .result-item p {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .no-results {
+            padding: 24px;
+            text-align: center;
+            color: var(--muted);
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,7 +72,7 @@
         <div class="header-content">
             <a class="site-logo" href="index.html">cppwiki</a>
 
-            <form class="search-form">
+            <form class="search-form" action="index.html" method="get">
                 <label class="sr-only" for="header-search">
                     Search cppwiki
                 </label>
@@ -37,11 +95,12 @@
     </header>
 
     <main class="main-content">
-        <section class="welcome" style="margin-top: 80px; padding: 48px 24px;">
+        <!-- Initial Search View -->
+        <section id="search-view" class="welcome" style="margin-top: 80px; padding: 48px 24px;">
             <h1>C++ Reference</h1>
             <p>Search for standard library components, headers, keywords, and language features.</p>
 
-            <form class="search-form" style="margin: 32px auto 0; width: 100%; max-width: 600px;">
+            <form id="main-search-form" class="search-form" style="margin: 32px auto 0; width: 100%; max-width: 600px;">
                 <label class="sr-only" for="main-search">
                     Search C++ Reference
                 </label>
@@ -63,10 +122,95 @@
                 <button type="submit" style="height: 48px; font-size: 16px;">Search</button>
             </form>
         </section>
+
+        <!-- Results View (Simulated New Page) -->
+        <section id="search-results-container">
+            <a href="#" id="back-to-search" class="back-button">&larr; Back to Search</a>
+            
+            <div class="learn-chapter" style="margin-top: 24px;">
+                <h1 id="results-heading">Search Results</h1>
+                <div id="results-list" class="learn-items">
+                    <!-- Results injected via script -->
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="site-footer">
         <p>&copy; 2026 cppwiki.com. A community-driven C++ resource.</p>
     </footer>
+
+    <!-- Search Routing Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchView = document.getElementById('search-view');
+            const resultsContainer = document.getElementById('search-results-container');
+            const searchForm = document.getElementById('main-search-form');
+            const searchInput = document.getElementById('main-search');
+            const resultsList = document.getElementById('results-list');
+            const resultsHeading = document.getElementById('results-heading');
+            const backButton = document.getElementById('back-to-search');
+            
+            let referenceData = [];
+
+            // Fetch references JSON on load
+            fetch('../json/references.json')
+                .then(response => response.json())
+                .then(data => {
+                    referenceData = data;
+                })
+                .catch(error => {
+                    console.error('Error loading references.json:', error);
+                });
+
+            // Handle clicking "Search" button or pressing Enter
+            searchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const query = searchInput.value.toLowerCase().trim();
+                
+                // Filter items based on query (if empty, returns everything)
+                const filtered = referenceData.filter(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.description.toLowerCase().includes(query)
+                );
+
+                renderResults(filtered, query);
+                
+                // Switch views to look like a new page
+                searchView.style.display = 'none';
+                resultsContainer.style.display = 'block';
+            });
+
+            // Handle clicking the back button
+            backButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                resultsContainer.style.display = 'none';
+                searchView.style.display = 'block';
+                searchInput.value = '';
+                searchInput.focus();
+            });
+
+            // Render matched or all results into the list
+            function renderResults(results, query) {
+                if (query) {
+                    resultsHeading.textContent = `Search Results for "${query}" (${results.length})`;
+                } else {
+                    resultsHeading.textContent = `All References (${results.length})`;
+                }
+
+                if (results.length === 0) {
+                    resultsList.innerHTML = '<p class="no-results">No matches found for your search.</p>';
+                    return;
+                }
+
+                resultsList.innerHTML = results.map(item => `
+                    <a href="${item.url}" class="result-item">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                    </a>
+                `).join('');
+            }
+        });
+    </script>
 </body>
 </html>
