@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Reference — cppwiki</title>
+    <title>Reference - cppwiki</title>
 
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -15,7 +15,7 @@
             <a class="site-logo" href="index.html">cppwiki</a>
 
             <form class="search-form">
-                <label class="sr-only" for="search">
+                <label class="sr-only" for="header-search">
                     Search cppwiki
                 </label>
 
@@ -23,7 +23,7 @@
                     <span class="search-icon" aria-hidden="true">⌕</span>
 
                     <input
-                        id="search"
+                        id="header-search"
                         type="search"
                         name="q"
                         placeholder="Search cppwiki"
@@ -35,5 +35,38 @@
             </form>
         </div>
     </header>
+
+    <main class="main-content">
+        <section class="welcome" style="margin-top: 80px; padding: 48px 24px;">
+            <h1>C++ Reference</h1>
+            <p>Search for standard library components, headers, keywords, and language features.</p>
+
+            <form class="search-form" style="margin: 32px auto 0; width: 100%; max-width: 600px;">
+                <label class="sr-only" for="main-search">
+                    Search C++ Reference
+                </label>
+
+                <div class="search-input-wrapper" style="height: 48px;">
+                    <span class="search-icon" aria-hidden="true" style="font-size: 24px;">⌕</span>
+
+                    <input
+                        id="main-search"
+                        type="search"
+                        name="q"
+                        placeholder="Search (e.g., std::vector, constexpr, <iostream>)"
+                        autocomplete="off"
+                        style="font-size: 16px;"
+                        autofocus
+                    >
+                </div>
+
+                <button type="submit" style="height: 48px; font-size: 16px;">Search</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 cppwiki.com. A community-driven C++ resource.</p>
+    </footer>
 </body>
 </html>

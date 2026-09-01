@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Learn — cppwiki</title>
+    <title>Learn - cppwiki</title>
 
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -35,5 +35,82 @@
             </form>
         </div>
     </header>
+
+    <main class="main-content">
+        <section id="chapters"></section>
+    </main>
+
+    <script>
+        async function loadChapters() {
+            const chaptersContainer =
+                document.getElementById("chapters");
+
+            try {
+                const response = await fetch("../json/learn.json");
+
+                if (!response.ok) {
+                    throw new Error("Could not load learn.json");
+                }
+
+                const data = await response.json();
+
+                data.chapters.forEach(chapter => {
+                    const chapterElement =
+                        document.createElement("section");
+
+                    chapterElement.className = "learn-chapter";
+
+                    const chapterTitle =
+                        document.createElement("h1");
+
+                    chapterTitle.textContent =
+                        `Chapter ${chapter.id} - ${chapter.name}`;
+
+                    chapterElement.appendChild(chapterTitle);
+
+                    const items =
+                        document.createElement("div");
+
+                    items.className = "learn-items";
+
+                    chapter.items.forEach(item => {
+                        const link =
+                            document.createElement("a");
+
+                        link.className = "learn-item";
+                        link.href = item.url;
+
+                        const title =
+                            document.createElement("h2");
+
+                        title.textContent =
+                            `${item.id} - ${item.name}`;
+
+                        link.appendChild(title);
+
+                        if (item.description) {
+                            const description =
+                                document.createElement("p");
+
+                            description.textContent =
+                                item.description;
+
+                            link.appendChild(description);
+                        }
+
+                        items.appendChild(link);
+                    });
+
+                    chapterElement.appendChild(items);
+                    chaptersContainer.appendChild(chapterElement);
+                });
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        loadChapters();
+    </script>
 </body>
 </html>
