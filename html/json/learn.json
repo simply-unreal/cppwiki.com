@@ -9,6 +9,12 @@
                     "name": "Introduction to these tutorials",
                     "description": "Learn how to use and read these tutorials.",
                     "url": "content/learn/chapter%200/lesson 1.html"
+                },
+                {
+                    "id": "0.2",
+                    "name": "What is C++?",
+                    "description": "Learn what C++ actually is.",
+                    "url": "content/learn/chapter%200/lesson 2.html"
                 }
             ]
         }

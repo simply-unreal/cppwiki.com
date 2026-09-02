@@ -54,7 +54,6 @@ def indent_html_except_code(html_text, indent="            "):
 
     result = []
     for i, part in enumerate(parts):
-        # Odd indices match the <pre>...</pre> blocks captured by the group
         if i % 2 == 1:
             result.append(part)
         else:

@@ -13,7 +13,6 @@
             background: #17191a;
         }
 
-        /* Styles for search results view */
         #search-results-container {
             display: none;
             margin-top: 34px;
@@ -95,7 +94,6 @@
     </header>
 
     <main class="main-content">
-        <!-- Initial Search View -->
         <section id="search-view" class="welcome" style="margin-top: 80px; padding: 48px 24px;">
             <h1>C++ Reference</h1>
             <p>Search for standard library components, headers, keywords, and language features.</p>
@@ -123,24 +121,17 @@
             </form>
         </section>
 
-        <!-- Results View (Simulated New Page) -->
         <section id="search-results-container">
             <a href="#" id="back-to-search" class="back-button">&larr; Back to Search</a>
             
             <div class="learn-chapter" style="margin-top: 24px;">
                 <h1 id="results-heading">Search Results</h1>
                 <div id="results-list" class="learn-items">
-                    <!-- Results injected via script -->
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <p>&copy; 2026 cppwiki.com. A community-driven C++ resource.</p>
-    </footer>
-
-    <!-- Search Routing Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchView = document.getElementById('search-view');
@@ -153,7 +144,6 @@
             
             let referenceData = [];
 
-            // Fetch references JSON on load
             fetch('json/references.json')
                 .then(response => response.json())
                 .then(data => {
@@ -163,12 +153,10 @@
                     console.error('Error loading references.json:', error);
                 });
 
-            // Handle clicking "Search" button or pressing Enter
             searchForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const query = searchInput.value.toLowerCase().trim();
                 
-                // Filter items based on query (if empty, returns everything)
                 const filtered = referenceData.filter(item => 
                     item.title.toLowerCase().includes(query) || 
                     item.description.toLowerCase().includes(query)
@@ -176,12 +164,10 @@
 
                 renderResults(filtered, query);
                 
-                // Switch views to look like a new page
                 searchView.style.display = 'none';
                 resultsContainer.style.display = 'block';
             });
 
-            // Handle clicking the back button
             backButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 resultsContainer.style.display = 'none';
@@ -190,7 +176,6 @@
                 searchInput.focus();
             });
 
-            // Render matched or all results into the list
             function renderResults(results, query) {
                 if (query) {
                     resultsHeading.textContent = `Search Results for "${query}" (${results.length})`;
