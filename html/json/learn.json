@@ -6,8 +6,8 @@
             "items": [
                 {
                     "id": "0.1",
-                    "name": "Introduction to C++",
-                    "description": "An introduction to the C++ programming language.",
+                    "name": "Introduction to these tutorials",
+                    "description": "Learn how to use and read these tutorials.",
                     "url": "content/learn/chapter%200/0-1.html"
                 }
             ]
