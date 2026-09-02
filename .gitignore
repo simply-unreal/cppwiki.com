@@ -1,3 +1,5 @@
 content/example.md
 content/example.html
 .wrangler
+html/content/example.html
+html/content/example.md
