@@ -6,12 +6,24 @@
 
     <title>cppwiki</title>
 
-    <meta
-        name="description"
-        content="The C++ knowledge database."
-    >
+    <meta name="description" content="The C++ knowledge wiki.">
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .wiki-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .wiki-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -48,7 +60,7 @@
                     Welcome to <a href="index.html">cppwiki</a>
                 </h1>
 
-                <p>The C++ knowledge database.</p>
+                <p>The C++ knowledge wiki.</p>
             </section>
 
             <section class="wiki-grid">
@@ -70,17 +82,6 @@
                         <p>
                             Reference material for the C++ language and
                             the standard library.
-                        </p>
-                    </div>
-                </a>
-
-                <a class="wiki-box" href="concepts.html">
-                    <h2>Concepts</h2>
-
-                    <div class="wiki-box-content">
-                        <p>
-                            Explanations of important rules, ideas, and
-                            concepts throughout C++.
                         </p>
                     </div>
                 </a>
