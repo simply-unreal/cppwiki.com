@@ -175,3 +175,7 @@ Each lesson is one step. Learn that step, practice it, and then move on to the n
 By combining many small concepts, you will eventually be able to build programs that initially seemed far too complicated.
 
 Take your time, experiment with the examples, and most importantly, **keep writing code**.
+
+!!! note "Note"
+
+    For the rest of this tutorial we are assuming you are using the clang++ compiler and you are on linux.

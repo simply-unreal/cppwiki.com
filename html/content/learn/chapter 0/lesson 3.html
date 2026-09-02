@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installing C++ - cppwiki</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-content">
+
+        <a class="site-logo" href="../../../index.html">
+            cppwiki
+        </a>
+
+        <form class="search-form" action="../../../index.html" method="get">
+
+            <label class="sr-only" for="search">
+                Search cppwiki
+            </label>
+
+            <div class="search-input-wrapper">
+
+                <span class="search-icon" aria-hidden="true">
+                    ⌕
+                </span>
+
+                <input
+                    id="search"
+                    type="search"
+                    name="q"
+                    placeholder="Search cppwiki"
+                    autocomplete="off"
+                />
+
+            </div>
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+    </div>
+</header>
+
+    <main class="main-content">
+
+        <a class="back-button" href="../../../learn.html">
+            ← Back to Learn
+        </a>
+
+        <article class="lesson-page">
+
+            <div class="lesson-meta">
+                <span class="meta-tag">Beginner</span>
+            </div>
+
+            <div class="toc">
+                <h2>Contents</h2>
+                <ol>
+            <li><a href="#installing-c">Installing C++</a>
+            <ul>
+            <li><a href="#ubuntu">Ubuntu</a>
+            </li>
+            <li><a href="#arch">Arch</a>
+            </li>
+            <li><a href="#installing-a-code-editor">Installing a Code Editor</a>
+            </li>
+            </ul>
+            </li>
+                </ol>
+            </div>
+
+            <h1 id="installing-c">Installing C++</h1>
+            <p>Now that you know what C++ actually is, we can get started with installing the tools you need to program in it.</p>
+            <h2 id="ubuntu">Ubuntu</h2>
+            <p>To install Clang and Clang++, the C and C++ compilers, you need to run these two commands:</p>
+            <div class="code-block">
+                <div class="code-block-header">Bash</div>
+    <pre><code>sudo apt update # Updates Ubuntu's list of available software packages
+
+sudo apt install clang # Installs Clang and Clang++
+</code></pre>
+            </div>
+            <p>If those commands succeeded, you can run this command to make sure Clang++ is actually installed:</p>
+            <div class="code-block">
+                <div class="code-block-header">Bash</div>
+    <pre><code>clang++ --version
+</code></pre>
+            </div>
+            <p>That should output something similar to this:</p>
+            <div class="code-block">
+                <div class="code-block-header">Text</div>
+    <pre><code>clang version 22.1.8
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+</code></pre>
+            </div>
+            <div class="admonition note">
+            <p class="admonition-title">Note</p>
+            <p>Don't worry if the output of <code>clang++ --version</code> does not exactly match the output shown above. As long as <code>clang++ --version</code> works, you should be good to go!</p>
+            </div>
+            <h2 id="arch">Arch</h2>
+            <p>Installing Clang++ on Arch is also pretty easy. First, run:</p>
+            <div class="code-block">
+                <div class="code-block-header">Bash</div>
+    <pre><code>sudo pacman -Syu # Updates the package database and upgrades installed packages
+</code></pre>
+            </div>
+            <p>Then run:</p>
+            <div class="code-block">
+                <div class="code-block-header">Bash</div>
+    <pre><code>sudo pacman -S clang
+</code></pre>
+            </div>
+            <p>If that command succeeded, you can run this to make sure Clang++ was installed:</p>
+            <div class="code-block">
+                <div class="code-block-header">Bash</div>
+    <pre><code>clang++ --version
+</code></pre>
+            </div>
+            <p>That should output something similar to this:</p>
+            <div class="code-block">
+                <div class="code-block-header">Text</div>
+    <pre><code>clang version 22.1.8
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+</code></pre>
+            </div>
+            <div class="admonition note">
+            <p class="admonition-title">Note</p>
+            <p>Don't worry if the output of <code>clang++ --version</code> does not exactly match the output shown above. As long as <code>clang++ --version</code> works, you should be good to go!</p>
+            </div>
+            <h2 id="installing-a-code-editor">Installing a Code Editor</h2>
+            <p>Now that you have Clang++ installed, you can choose a code editor.</p>
+            <div class="admonition tip">
+            <p class="admonition-title">Tip</p>
+            <p>A code editor is a matter of personal preference, so use whatever you like!</p>
+            </div>
+            <p>For this tutorial, we will be using VS Code, but you can use any code editor you want.</p>
+            <p>To install VS Code, go to <a href="https://code.visualstudio.com/download">this link</a>.</p>
+            <p>Once you're there, install the latest version for your distro. If you're on Arch and you don't see a download option, run this command in your terminal:</p>
+            <div class="code-block">
+                <div class="code-block-header">Bash</div>
+    <pre><code>sudo pacman -S code
+</code></pre>
+            </div>
+            <p>Once VS Code is installed, you'll need the C++ extension. Use this keyboard shortcut to open the Extensions panel:</p>
+            <p><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd></p>
+            <p>Now find the extension called <strong>C/C++ Extension Pack</strong> by <strong>Microsoft</strong>.</p>
+            <p>This will give you everything you need to get started with programming in C++!</p>
+            <div class="admonition note">
+            <p class="admonition-title">Note</p>
+            <p>If something doesn't work for you, feel free to search for a solution, ask an AI, or look up a YouTube tutorial!</p>
+            </div>
+
+        </article>
+
+    </main>
+
+</body>
+</html>
