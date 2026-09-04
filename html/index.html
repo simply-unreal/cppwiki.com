@@ -13,14 +13,293 @@
     <style>
         .wiki-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
             width: 100%;
+        }
+
+        .wiki-box-content {
+            padding-right: 52px;
+        }
+
+        .home-section {
+            margin-top: 18px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .home-section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 7px 12px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface-header);
+        }
+
+        .home-section-header h2 {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px;
+            line-height: 1.35;
+        }
+
+        .home-section-header p {
+            margin: 0;
+            color: var(--muted-dark);
+            font-size: 13px;
+        }
+
+        .explore-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+            padding: 12px;
+        }
+
+        .explore-card {
+            display: block;
+            min-height: 126px;
+            padding: 15px;
+            border: 1px solid var(--border);
+            background: var(--surface-raised);
+            color: var(--text);
+            text-decoration: none;
+            transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+        }
+
+        .explore-card:hover {
+            background: #292c2d;
+            border-color: var(--border-light);
+            color: var(--text);
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        .explore-card h3 {
+            margin: 0 0 4px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 18px;
+            line-height: 1.3;
+        }
+
+        .explore-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .home-columns {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .home-panel {
+            min-width: 0;
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .home-panel h2 {
+            margin: 0;
+            padding: 9px 12px;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface-header);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+            line-height: 1.35;
+        }
+
+        .home-panel-body {
+            padding: 12px 14px 14px;
+        }
+
+        .home-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .home-list a {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border-dark);
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        .home-list a:last-child {
+            border-bottom: 0;
+        }
+
+        .home-list a:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .home-list .list-meta {
+            flex-shrink: 0;
+            color: var(--muted-dark);
+            font-size: 12px;
+        }
+
+        .home-list-status {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .home-tip {
+            min-height: 100%;
+        }
+
+        .tip-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-bottom: 10px;
+            color: var(--warning);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .home-tip p {
+            margin: 0 0 14px;
+            color: var(--muted);
+        }
+
+        .home-link-row {
+            margin-top: 12px;
+        }
+
+        .home-link-row a {
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        .home-link-row a:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
+
+        .home-footer {
+            width: 100%;
+            margin-top: 10px;
+            padding: 16px 0 26px;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        .home-footer-inner {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .footer-brand {
+            color: var(--text);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 19px;
+        }
+
+        .footer-subtitle {
+            margin-top: 2px;
+            color: var(--muted-dark);
+            font-size: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 24px;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .footer-links a:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
+
+        .footer-socials {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .footer-socials a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .footer-socials a:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .footer-legal {
+            width: min(calc(100% - 64px), 1200px);
+            margin: 0 auto;
+            padding: 12px 0 16px;
+            color: var(--muted-dark);
+            font-size: 11px;
+            text-align: center;
+        }
+
+        @media (max-width: 1000px) {
+            .explore-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .home-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .home-footer-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-socials {
+                justify-content: center;
+            }
         }
 
         @media (max-width: 600px) {
             .wiki-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .explore-grid {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+
+            .home-section-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .footer-legal {
+                width: min(calc(100% - 32px), 1200px);
             }
         }
     </style>
@@ -37,7 +316,7 @@
                 </label>
 
                 <div class="search-input-wrapper">
-                    <span class="search-icon" aria-hidden="true">⌕</span>
+                    <span class="search-icon" aria-hidden="true"></span>
 
                     <input
                         id="search"
@@ -83,10 +362,109 @@
                     </div>
                 </a>
             </section>
+
+            <section class="home-section" aria-labelledby="explore-heading">
+                <div class="home-section-header">
+                    <h2 id="explore-heading">Explore C++</h2>
+                </div>
+
+                <div class="explore-grid">
+                    <a class="explore-card" href="index.html?q=basics">
+                        <h3>Basics</h3>
+                        <p>Syntax, variables, types, operators, and core language concepts.</p>
+                    </a>
+
+                    <a class="explore-card" href="index.html?q=classes">
+                        <h3>OOP</h3>
+                        <p>Classes, objects, inheritance, polymorphism, and encapsulation.</p>
+                    </a>
+
+                    <a class="explore-card" href="index.html?q=stl">
+                        <h3>STL</h3>
+                        <p>Containers, iterators, algorithms, utilities, and common patterns.</p>
+                    </a>
+
+                    <a class="explore-card" href="index.html?q=templates">
+                        <h3>Templates</h3>
+                        <p>Function templates, class templates, type deduction, and generic code.</p>
+                    </a>
+
+                    <a class="explore-card" href="index.html?q=memory">
+                        <h3>Memory Management</h3>
+                        <p>Pointers, dynamic memory, RAII, ownership, and smart pointers.</p>
+                    </a>
+
+                    <a class="explore-card" href="index.html?q=modern+c%2B%2B">
+                        <h3>Modern C++</h3>
+                        <p>Modern language features and the techniques introduced after C++03.</p>
+                    </a>
+
+                    <a class="explore-card" href="index.html?q=concurrency">
+                        <h3>Concurrency</h3>
+                        <p>Threads, mutexes, atomics, synchronization, and concurrent code.</p>
+                    </a>
+
+                    <a class="explore-card" href="index.html?q=modules">
+                        <h3>Modules</h3>
+                        <p>Module interfaces, imports, partitions, and the modern build model.</p>
+                    </a>
+                </div>
+            </section>
+
+            <section class="home-columns" aria-label="Homepage highlights">
+                <section class="home-panel">
+                    <h2>Popular</h2>
+                    <div class="home-panel-body">
+                        <nav class="home-list" id="popular-list" aria-label="Popular pages" aria-live="polite">
+                            <p class="home-list-status">Loading popular pages...</p>
+                        </nav>
+                    </div>
+                </section>
+
+                <section class="home-panel">
+                    <h2>Recently Updated</h2>
+                    <div class="home-panel-body">
+                        <nav class="home-list" id="recently-updated-list" aria-label="Recently updated pages" aria-live="polite">
+                            <p class="home-list-status">Loading recent updates...</p>
+                        </nav>
+                    </div>
+                </section>
+
+                <section class="home-panel home-tip">
+                    <h2>C++ Tip</h2>
+                    <div class="home-panel-body" id="cpp-tip-content" aria-live="polite">
+                        <p class="home-list-status">Loading tip...</p>
+                    </div>
+                </section>
+            </section>
+
+            <section class="wiki-grid" aria-label="Article guide">
+                <a class="wiki-box" href="make.html" style="grid-column: 1 / -1;">
+                    <h2>How to make a article</h2>
+
+                    <div class="wiki-box-content">
+                        <p>Learn how to create a cppwiki article.</p>
+                    </div>
+                </a>
+            </section>
+
+            <footer class="home-footer">
+                <div class="home-footer-inner">
+                    <div>
+                        <div class="footer-brand">cppwiki</div>
+                        <div class="footer-subtitle">C++ knowledge wiki</div>
+                    </div>
+
+                    <nav class="footer-links" aria-label="Contact links">
+                        <a href="https://github.com/simply-unreal/cppwiki.com" target="_blank" rel="noopener noreferrer" aria-label="cppwiki GitHub">GitHub</a>
+                        <a href="mailto:simplyunreal323@gmail.com" aria-label="Email cppwiki">Email</a>
+                    </nav>
+                </div>
+            </footer>
         </div>
 
         <section id="search-results-container" style="display: none;">
-            <a href="#" id="back-to-home" class="back-button">← Back to Home</a>
+            <a href="#" id="back-to-home" class="back-button">Back to Home</a>
 
             <div class="learn-chapter" style="margin-top: 24px;">
                 <h1 id="results-heading">Search Results</h1>
@@ -96,247 +474,145 @@
         </section>
     </main>
 
-    <footer class="site-footer">
+    <div class="footer-legal">
         Content on cppwiki may not be used to train or fine-tune
         large language models without permission.
-    </footer>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const homeView = document.getElementById('home-view');
-            const resultsContainer = document.getElementById('search-results-container');
-            const searchForm = document.getElementById('search-form');
-            const searchInput = document.getElementById('search');
-            const resultsList = document.getElementById('results-list');
-            const resultsHeading = document.getElementById('results-heading');
-            const backButton = document.getElementById('back-to-home');
-            const siteLogo = document.querySelector('.site-logo');
+        async function loadJson(path) {
+            const response = await fetch(path, { cache: 'no-store' });
 
-            let allSearchData = [];
-            let loadPromise = null;
-
-            function escapeHtml(str) {
-                if (!str) return '';
-                return String(str)
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&#039;');
+            if (!response.ok) {
+                throw new Error(`Request failed with status ${response.status}`);
             }
 
-            async function loadData() {
-                if (loadPromise) return loadPromise;
+            return response.json();
+        }
 
-                loadPromise = (async () => {
-                    try {
-                        const [learnRes, refRes] = await Promise.all([
-                            fetch('json/learn.json').catch(e => {
-                                console.error('Error loading learn.json:', e);
-                                return { ok: false };
-                            }),
-                            fetch('json/references.json').catch(e => {
-                                console.error('Error loading references.json:', e);
-                                return { ok: false };
-                            })
-                        ]);
+        function createPageLinks(list, items, emptyMessage) {
+            list.innerHTML = '';
 
-                        const items = [];
-
-                        if (learnRes.ok) {
-                            const learnData = await learnRes.json();
-                            if (learnData && Array.isArray(learnData.chapters)) {
-                                learnData.chapters.forEach(chapter => {
-                                    const chapterName = chapter.name || '';
-                                    const chapterId = chapter.id != null ? chapter.id : '';
-                                    if (Array.isArray(chapter.items)) {
-                                        chapter.items.forEach(item => {
-                                            items.push({
-                                                title: item.id ? `${item.id} - ${item.name}` : (item.name || ''),
-                                                name: item.name || '',
-                                                id: item.id || '',
-                                                chapterName: chapterName,
-                                                chapterId: chapterId,
-                                                category: 'Learn',
-                                                description: item.description || '',
-                                                url: item.url || ''
-                                            });
-                                        });
-                                    }
-                                });
-                            }
-                        }
-
-                        if (refRes.ok) {
-                            const refData = await refRes.json();
-                            if (Array.isArray(refData)) {
-                                refData.forEach(item => {
-                                    items.push({
-                                        title: item.title || '',
-                                        name: item.title || '',
-                                        id: '',
-                                        chapterName: '',
-                                        chapterId: '',
-                                        category: 'Reference',
-                                        description: item.description || '',
-                                        url: item.url || ''
-                                    });
-                                });
-                            }
-                        }
-
-                        allSearchData = items;
-                        return allSearchData;
-                    } catch (err) {
-                        console.error('Error initializing search data:', err);
-                        return [];
-                    }
-                })();
-
-                return loadPromise;
+            if (!Array.isArray(items)) {
+                throw new Error('Expected an array');
             }
 
-            function searchItems(query) {
-                const rawQuery = (query || '').trim();
-                if (!rawQuery) {
-                    return allSearchData;
-                }
-
-                const q = rawQuery.toLowerCase();
-                const queryTokens = q.split(/\s+/).filter(Boolean);
-                const scored = [];
-
-                for (const item of allSearchData) {
-                    const titleLower = item.title.toLowerCase();
-                    const descLower = item.description.toLowerCase();
-                    const catLower = item.category.toLowerCase();
-                    const chapterLower = (item.chapterName || '').toLowerCase();
-                    const idLower = (item.id || '').toLowerCase();
-
-                    const combinedText = `${titleLower} ${descLower} ${catLower} ${chapterLower} ${idLower}`;
-
-                    const allTokensMatch = queryTokens.every(token => combinedText.includes(token));
-                    if (!allTokensMatch && !combinedText.includes(q)) {
-                        continue;
-                    }
-
-                    let score = 0;
-
-                    if (titleLower === q || idLower === q) {
-                        score += 100;
-                    } else if (titleLower.startsWith(q)) {
-                        score += 60;
-                    } else if (titleLower.includes(q)) {
-                        score += 40;
-                    }
-
-                    for (const token of queryTokens) {
-                        if (titleLower.includes(token)) score += 15;
-                        if (idLower === token) score += 20;
-                        if (descLower.includes(token)) score += 5;
-                        if (chapterLower.includes(token)) score += 5;
-                        if (catLower.includes(token)) score += 3;
-                    }
-
-                    scored.push({ item, score });
-                }
-
-                scored.sort((a, b) => {
-                    if (b.score !== a.score) {
-                        return b.score - a.score;
-                    }
-                    return a.item.title.localeCompare(b.item.title);
-                });
-
-                return scored.map(s => s.item);
-            }
-
-            function renderResults(results, query) {
-                const rawQuery = (query || '').trim();
-                if (rawQuery) {
-                    resultsHeading.textContent = `Search Results for "${rawQuery}" (${results.length})`;
-                } else {
-                    resultsHeading.textContent = `All Results (${results.length})`;
-                }
-
-                if (results.length === 0) {
-                    resultsList.innerHTML = `<p class="no-results">No matches found for "${escapeHtml(rawQuery)}".</p>`;
+            items.forEach((item) => {
+                if (!item || typeof item !== 'object') {
                     return;
                 }
 
-                resultsList.innerHTML = results.map(item => `
-                    <a href="${escapeHtml(item.url)}" class="learn-item">
-                        <div class="result-header">
-                            <h2>${escapeHtml(item.title)}</h2>
-                            <span class="meta-tag">${escapeHtml(item.category)}</span>
-                        </div>
-                        ${item.description ? `<p>${escapeHtml(item.description)}</p>` : ''}
-                    </a>
-                `).join('');
-            }
+                const title = String(item.title || '').trim();
+                const url = String(item.url || '').trim();
+                const category = String(item.category || '').trim();
 
-            async function performSearch(query, updateHistory = true) {
-                await loadData();
-                const results = searchItems(query);
-                renderResults(results, query);
-
-                homeView.style.display = 'none';
-                resultsContainer.style.display = 'block';
-
-                if (updateHistory) {
-                    const trimmed = (query || '').trim();
-                    const newUrl = trimmed ? `index.html?q=${encodeURIComponent(trimmed)}` : 'index.html';
-                    history.pushState({ view: 'search', query: trimmed }, '', newUrl);
+                if (!title || !url) {
+                    return;
                 }
-            }
 
-            function showHomeView(updateHistory = true) {
-                resultsContainer.style.display = 'none';
-                homeView.style.display = 'block';
-                searchInput.value = '';
+                const link = document.createElement('a');
+                link.href = url;
 
-                if (updateHistory) {
-                    history.pushState({ view: 'home' }, '', 'index.html');
+                const titleSpan = document.createElement('span');
+                titleSpan.textContent = title;
+
+                link.appendChild(titleSpan);
+
+                if (category) {
+                    const metaSpan = document.createElement('span');
+                    metaSpan.className = 'list-meta';
+                    metaSpan.textContent = category;
+                    link.appendChild(metaSpan);
                 }
-            }
 
-            searchForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const query = searchInput.value;
-                performSearch(query, true);
+                list.appendChild(link);
             });
 
-            backButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                showHomeView(true);
-            });
-
-            siteLogo.addEventListener('click', (e) => {
-                if (resultsContainer.style.display === 'block') {
-                    e.preventDefault();
-                    showHomeView(true);
-                }
-            });
-
-            window.addEventListener('popstate', (e) => {
-                const params = new URLSearchParams(window.location.search);
-                const q = params.get('q');
-                if (q !== null && q !== '') {
-                    searchInput.value = q;
-                    performSearch(q, false);
-                } else {
-                    showHomeView(false);
-                }
-            });
-
-            loadData();
-            const params = new URLSearchParams(window.location.search);
-            const initialQuery = params.get('q');
-            if (initialQuery !== null && initialQuery !== '') {
-                searchInput.value = initialQuery;
-                performSearch(initialQuery, false);
+            if (!list.children.length) {
+                list.innerHTML = `<p class="home-list-status">${emptyMessage}</p>`;
             }
-        });
+        }
+
+        async function loadPopular() {
+            const list = document.getElementById('popular-list');
+
+            try {
+                const popular = await loadJson('json/popular.json');
+                createPageLinks(list, popular, 'No popular pages found.');
+            } catch (error) {
+                console.error('Unable to load popular pages:', error);
+                list.innerHTML = '<p class="home-list-status">Popular pages are unavailable right now.</p>';
+            }
+        }
+
+        async function loadRecentlyUpdated() {
+            const list = document.getElementById('recently-updated-list');
+
+            try {
+                const updates = await loadJson('json/updated.json');
+                createPageLinks(list, updates, 'No recent updates found.');
+            } catch (error) {
+                console.error('Unable to load recent updates:', error);
+                list.innerHTML = '<p class="home-list-status">Recent updates are unavailable right now.</p>';
+            }
+        }
+
+        async function loadTip() {
+            const container = document.getElementById('cpp-tip-content');
+
+            try {
+                const tip = await loadJson('json/tip.json');
+
+                if (!tip || typeof tip !== 'object') {
+                    throw new Error('tip.json must contain an object');
+                }
+
+                const label = String(tip.label || '').trim();
+                const text = String(tip.text || '').trim();
+                const url = String(tip.url || '').trim();
+                const linkText = String(tip.linkText || '').trim();
+
+                container.innerHTML = '';
+
+                if (label) {
+                    const labelElement = document.createElement('div');
+                    labelElement.className = 'tip-label';
+                    labelElement.setAttribute('aria-hidden', 'true');
+                    labelElement.textContent = label;
+                    container.appendChild(labelElement);
+                }
+
+                if (text) {
+                    const textElement = document.createElement('p');
+                    textElement.textContent = text;
+                    container.appendChild(textElement);
+                }
+
+                if (url && linkText) {
+                    const row = document.createElement('div');
+                    row.className = 'home-link-row';
+
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.textContent = linkText;
+
+                    row.appendChild(link);
+                    container.appendChild(row);
+                }
+
+                if (!container.children.length) {
+                    container.innerHTML = '<p class="home-list-status">No tip is available.</p>';
+                }
+            } catch (error) {
+                console.error('Unable to load C++ tip:', error);
+                container.innerHTML = '<p class="home-list-status">The C++ tip is unavailable right now.</p>';
+            }
+        }
+
+        loadPopular();
+        loadRecentlyUpdated();
+        loadTip();
     </script>
+    <script src="js/search.js"></script>
 </body>
 </html>
