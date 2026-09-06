@@ -1,6 +1,7 @@
-content/example.md
-content/example.html
+content\example.md
+content\example.html
 .wrangler
-html/content/example.html
-html/content/example.md
-/update.sh
+html\content\example.html
+html\content\example.md
+\update.bat
+node_modules
