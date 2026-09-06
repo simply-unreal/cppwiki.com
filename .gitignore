@@ -5,3 +5,5 @@ html\content\example.html
 html\content\example.md
 \update.bat
 node_modules
+\__pycache__
+refresh.bat
