@@ -23,6 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const siteLogo =
         document.querySelector('.site-logo');
 
+    if (
+        !searchForm ||
+        !searchInput ||
+        !resultsContainer ||
+        !resultsList ||
+        !resultsHeading
+    ) {
+        return;
+    }
+
     let allSearchData = [];
     let loadPromise = null;
 
@@ -48,29 +58,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     learnRes,
                     refRes
                 ] = await Promise.all([
-                    fetch('json/learn.json')
-                        .catch(error => {
-                            console.error(
-                                'Error loading learn.json:',
-                                error
-                            );
+                    fetch('json/learn.json', {
+                        cache: 'no-store'
+                    }).catch(error => {
+                        console.error(
+                            'Error loading learn.json:',
+                            error
+                        );
 
-                            return {
-                                ok: false
-                            };
-                        }),
+                        return {
+                            ok: false
+                        };
+                    }),
 
-                    fetch('json/references.json')
-                        .catch(error => {
-                            console.error(
-                                'Error loading references.json:',
-                                error
-                            );
+                    fetch('json/references.json', {
+                        cache: 'no-store'
+                    }).catch(error => {
+                        console.error(
+                            'Error loading references.json:',
+                            error
+                        );
 
-                            return {
-                                ok: false
-                            };
-                        })
+                        return {
+                            ok: false
+                        };
+                    })
                 ]);
 
                 const items = [];
@@ -81,61 +93,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (
                         learnData &&
-                        Array.isArray(
-                            learnData.chapters
-                        )
+                        Array.isArray(learnData.chapters)
                     ) {
-                        learnData.chapters.forEach(
-                            chapter => {
-                                const chapterName =
-                                    chapter.name || '';
+                        learnData.chapters.forEach(chapter => {
+                            const chapterName =
+                                chapter.name || '';
 
-                                const chapterId =
-                                    chapter.id != null
-                                        ? chapter.id
-                                        : '';
+                            const chapterId =
+                                chapter.id != null
+                                    ? chapter.id
+                                    : '';
 
-                                if (
-                                    Array.isArray(
-                                        chapter.items
-                                    )
-                                ) {
-                                    chapter.items.forEach(
-                                        item => {
-                                            items.push({
-                                                title:
-                                                    item.id
-                                                        ? `${item.id} - ${item.name}`
-                                                        : (
-                                                            item.name || ''
-                                                        ),
+                            if (
+                                Array.isArray(
+                                    chapter.items
+                                )
+                            ) {
+                                chapter.items.forEach(item => {
+                                    items.push({
+                                        title:
+                                            item.id != null
+                                                ? `${item.id} - ${item.name || ''}`
+                                                : (
+                                                    item.name || ''
+                                                ),
 
-                                                name:
-                                                    item.name || '',
+                                        name:
+                                            item.name || '',
 
-                                                id:
-                                                    item.id || '',
+                                        id:
+                                            item.id != null
+                                                ? String(item.id)
+                                                : '',
 
-                                                chapterName:
-                                                    chapterName,
+                                        chapterName:
+                                            chapterName,
 
-                                                chapterId:
-                                                    chapterId,
+                                        chapterId:
+                                            chapterId,
 
-                                                category:
-                                                    'Learn',
+                                        category:
+                                            'Learn',
 
-                                                description:
-                                                    item.description || '',
+                                        description:
+                                            item.description || '',
 
-                                                url:
-                                                    item.url || ''
-                                            });
-                                        }
-                                    );
-                                }
+                                        url:
+                                            item.url || ''
+                                    });
+                                });
                             }
-                        );
+                        });
                     }
                 }
 
@@ -155,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 id: '',
 
                                 chapterName: '',
-
                                 chapterId: '',
 
                                 category:
@@ -208,23 +215,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (const item of allSearchData) {
             const titleLower =
-                item.title.toLowerCase();
+                String(item.title || '').toLowerCase();
 
             const descLower =
-                item.description.toLowerCase();
+                String(item.description || '').toLowerCase();
 
             const catLower =
-                item.category.toLowerCase();
+                String(item.category || '').toLowerCase();
 
             const chapterLower =
-                (
-                    item.chapterName || ''
-                ).toLowerCase();
+                String(item.chapterName || '').toLowerCase();
 
             const idLower =
-                (
-                    item.id || ''
-                ).toLowerCase();
+                String(item.id || '').toLowerCase();
 
             const combinedText =
                 `${titleLower} ${descLower} ${catLower} ${chapterLower} ${idLower}`;
@@ -249,12 +252,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 idLower === q
             ) {
                 score += 100;
-
             } else if (
                 titleLower.startsWith(q)
             ) {
                 score += 60;
-
             } else if (
                 titleLower.includes(q)
             ) {
@@ -262,33 +263,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             for (const token of queryTokens) {
-                if (
-                    titleLower.includes(token)
-                ) {
+                if (titleLower.includes(token)) {
                     score += 15;
                 }
 
-                if (
-                    idLower === token
-                ) {
+                if (idLower === token) {
                     score += 20;
                 }
 
-                if (
-                    descLower.includes(token)
-                ) {
+                if (descLower.includes(token)) {
                     score += 5;
                 }
 
-                if (
-                    chapterLower.includes(token)
-                ) {
+                if (chapterLower.includes(token)) {
                     score += 5;
                 }
 
-                if (
-                    catLower.includes(token)
-                ) {
+                if (catLower.includes(token)) {
                     score += 3;
                 }
             }
@@ -300,9 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         scored.sort((a, b) => {
-            if (
-                b.score !== a.score
-            ) {
+            if (b.score !== a.score) {
                 return b.score - a.score;
             }
 
@@ -323,7 +312,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (rawQuery) {
             resultsHeading.textContent =
                 `Search Results for "${rawQuery}" (${results.length})`;
-
         } else {
             resultsHeading.textContent =
                 `All Results (${results.length})`;
@@ -347,7 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         class="learn-item"
                     >
                         <div class="result-header">
-
                             <h2>
                                 ${escapeHtml(item.title)}
                             </h2>
@@ -355,7 +342,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="meta-tag">
                                 ${escapeHtml(item.category)}
                             </span>
-
                         </div>
 
                         ${
@@ -369,7 +355,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 `
                                 : ''
                         }
-
                     </a>
                 `)
                 .join('');
@@ -452,28 +437,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     );
 
-    backButton.addEventListener(
-        'click',
-        event => {
-            event.preventDefault();
-
-            showHomeView(true);
-        }
-    );
-
-    siteLogo.addEventListener(
-        'click',
-        event => {
-            if (
-                resultsContainer.style.display ===
-                'block'
-            ) {
+    if (backButton) {
+        backButton.addEventListener(
+            'click',
+            event => {
                 event.preventDefault();
 
                 showHomeView(true);
             }
-        }
-    );
+        );
+    }
+
+    if (siteLogo) {
+        siteLogo.addEventListener(
+            'click',
+            event => {
+                if (
+                    resultsContainer.style.display ===
+                    'block'
+                ) {
+                    event.preventDefault();
+
+                    showHomeView(true);
+                }
+            }
+        );
+    }
 
     window.addEventListener(
         'popstate',

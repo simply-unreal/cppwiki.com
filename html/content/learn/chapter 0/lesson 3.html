@@ -55,18 +55,12 @@
 
         <article class="lesson-page">
 
-            <div class="lesson-meta">
-                <span class="meta-tag">Beginner</span>
-            </div>
-
             <div class="toc">
                 <h2>Contents</h2>
                 <ol>
             <li><a href="#installing-c">Installing C++</a>
             <ul>
-            <li><a href="#ubuntu">Ubuntu</a>
-            </li>
-            <li><a href="#arch">Arch</a>
+            <li><a href="#windows">Windows</a>
             </li>
             <li><a href="#installing-a-code-editor">Installing a Code Editor</a>
             </li>
@@ -77,18 +71,19 @@
 
             <h1 id="installing-c">Installing C++</h1>
             <p>Now that you know what C++ actually is, we can get started with installing the tools you need to program in it.</p>
-            <h2 id="ubuntu">Ubuntu</h2>
-            <p>To install Clang and Clang++, the C and C++ compilers, you need to run these two commands:</p>
+            <h2 id="windows">Windows</h2>
+            <p>On Windows, we'll use <a href="https://scoop.sh/">Scoop</a> to install Clang, the C and C++ compiler.</p>
+            <p>First, make sure Scoop is installed. If you don't have it yet, follow the instructions on the <a href="https://scoop.sh/">Scoop website</a>.</p>
+            <p>Once Scoop is installed, open <strong>PowerShell</strong> and run:</p>
             <div class="code-block">
-                <div class="code-block-header">Bash</div>
-    <pre><code>sudo apt update # Updates Ubuntu's list of available software packages
-
-sudo apt install clang # Installs Clang and Clang++
+                <div class="code-block-header">POWERSHELL</div>
+    <pre><code>scoop install llvm
 </code></pre>
             </div>
-            <p>If those commands succeeded, you can run this command to make sure Clang++ is actually installed:</p>
+            <p>This will install LLVM, which includes <strong>Clang</strong> and <strong>Clang++</strong>.</p>
+            <p>If the command succeeded, you can run this to make sure Clang++ is actually installed:</p>
             <div class="code-block">
-                <div class="code-block-header">Bash</div>
+                <div class="code-block-header">POWERSHELL</div>
     <pre><code>clang++ --version
 </code></pre>
             </div>
@@ -96,46 +91,14 @@ sudo apt install clang # Installs Clang and Clang++
             <div class="code-block">
                 <div class="code-block-header">Text</div>
     <pre><code>clang version 22.1.8
-Target: x86_64-pc-linux-gnu
+Target: x86_64-pc-windows-msvc
 Thread model: posix
-InstalledDir: /usr/bin
+InstalledDir: ...
 </code></pre>
             </div>
             <div class="admonition note">
             <p class="admonition-title">Note</p>
-            <p>Don't worry if the output of <code>clang++ --version</code> does not exactly match the output shown above. As long as <code>clang++ --version</code> works, you should be good to go!</p>
-            </div>
-            <h2 id="arch">Arch</h2>
-            <p>Installing Clang++ on Arch is also pretty easy. First, run:</p>
-            <div class="code-block">
-                <div class="code-block-header">Bash</div>
-    <pre><code>sudo pacman -Syu # Updates the package database and upgrades installed packages
-</code></pre>
-            </div>
-            <p>Then run:</p>
-            <div class="code-block">
-                <div class="code-block-header">Bash</div>
-    <pre><code>sudo pacman -S clang
-</code></pre>
-            </div>
-            <p>If that command succeeded, you can run this to make sure Clang++ was installed:</p>
-            <div class="code-block">
-                <div class="code-block-header">Bash</div>
-    <pre><code>clang++ --version
-</code></pre>
-            </div>
-            <p>That should output something similar to this:</p>
-            <div class="code-block">
-                <div class="code-block-header">Text</div>
-    <pre><code>clang version 22.1.8
-Target: x86_64-pc-linux-gnu
-Thread model: posix
-InstalledDir: /usr/bin
-</code></pre>
-            </div>
-            <div class="admonition note">
-            <p class="admonition-title">Note</p>
-            <p>Don't worry if the output of <code>clang++ --version</code> does not exactly match the output shown above. As long as <code>clang++ --version</code> works, you should be good to go!</p>
+            <p>Don't worry if the output of <code>clang++ --version</code> does not exactly match the output shown above. The version and other details may be different. As long as <code>clang++ --version</code> works, you should be good to go!</p>
             </div>
             <h2 id="installing-a-code-editor">Installing a Code Editor</h2>
             <p>Now that you have Clang++ installed, you can choose a code editor.</p>
@@ -144,11 +107,11 @@ InstalledDir: /usr/bin
             <p>A code editor is a matter of personal preference, so use whatever you like!</p>
             </div>
             <p>For this tutorial, we will be using VS Code, but you can use any code editor you want.</p>
-            <p>To install VS Code, go to <a href="https://code.visualstudio.com/download">this link</a>.</p>
-            <p>Once you're there, install the latest version for your distro. If you're on Arch and you don't see a download option, run this command in your terminal:</p>
+            <p>Since we're using Scoop, you can install VS Code directly from PowerShell:</p>
             <div class="code-block">
-                <div class="code-block-header">Bash</div>
-    <pre><code>sudo pacman -S code
+                <div class="code-block-header">POWERSHELL</div>
+    <pre><code>scoop bucket add extras
+scoop install vscode
 </code></pre>
             </div>
             <p>Once VS Code is installed, you'll need the C++ extension. Use this keyboard shortcut to open the Extensions panel:</p>

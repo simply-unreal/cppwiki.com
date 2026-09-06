@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
+<style>
+    .chapter-number {
+        font-size: 1.3em;
+        font-weight: 700;
+    }
+</style>
+
 <body>
     <header class="site-header">
         <div class="header-content">
@@ -63,8 +70,8 @@
                     const chapterTitle =
                         document.createElement("h1");
 
-                    chapterTitle.textContent =
-                        `Chapter ${chapter.id} - ${chapter.name}`;
+                    chapterTitle.innerHTML =
+                        `Chapter <span class="chapter-number">${chapter.id}</span> - ${chapter.name}`;
 
                     chapterElement.appendChild(chapterTitle);
 

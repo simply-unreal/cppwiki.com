@@ -11,15 +11,19 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
+        html {
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
         .wiki-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 18px;
             width: 100%;
-        }
-
-        .wiki-box-content {
-            padding-right: 52px;
         }
 
         .home-section {

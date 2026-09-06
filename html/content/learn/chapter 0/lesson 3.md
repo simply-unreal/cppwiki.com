@@ -1,25 +1,24 @@
----
-title: Installing C++
-difficulty: Beginner
----
-
 # Installing C++
 
 Now that you know what C++ actually is, we can get started with installing the tools you need to program in it.
 
-## Ubuntu
+## Windows
 
-To install Clang and Clang++, the C and C++ compilers, you need to run these two commands:
+On Windows, we'll use [Scoop](https://scoop.sh/) to install Clang, the C and C++ compiler.
 
-```bash
-sudo apt update # Updates Ubuntu's list of available software packages
+First, make sure Scoop is installed. If you don't have it yet, follow the instructions on the [Scoop website](https://scoop.sh/).
 
-sudo apt install clang # Installs Clang and Clang++
+Once Scoop is installed, open **PowerShell** and run:
+
+```powershell
+scoop install llvm
 ```
 
-If those commands succeeded, you can run this command to make sure Clang++ is actually installed:
+This will install LLVM, which includes **Clang** and **Clang++**.
 
-```bash
+If the command succeeded, you can run this to make sure Clang++ is actually installed:
+
+```powershell
 clang++ --version
 ```
 
@@ -27,47 +26,14 @@ That should output something similar to this:
 
 ```text
 clang version 22.1.8
-Target: x86_64-pc-linux-gnu
+Target: x86_64-pc-windows-msvc
 Thread model: posix
-InstalledDir: /usr/bin
+InstalledDir: ...
 ```
 
 !!! note
 
-    Don't worry if the output of `clang++ --version` does not exactly match the output shown above. As long as `clang++ --version` works, you should be good to go!
-
-## Arch
-
-Installing Clang++ on Arch is also pretty easy. First, run:
-
-```bash
-sudo pacman -Syu # Updates the package database and upgrades installed packages
-```
-
-Then run:
-
-```bash
-sudo pacman -S clang
-```
-
-If that command succeeded, you can run this to make sure Clang++ was installed:
-
-```bash
-clang++ --version
-```
-
-That should output something similar to this:
-
-```text
-clang version 22.1.8
-Target: x86_64-pc-linux-gnu
-Thread model: posix
-InstalledDir: /usr/bin
-```
-
-!!! note
-
-    Don't worry if the output of `clang++ --version` does not exactly match the output shown above. As long as `clang++ --version` works, you should be good to go!
+    Don't worry if the output of `clang++ --version` does not exactly match the output shown above. The version and other details may be different. As long as `clang++ --version` works, you should be good to go!
 
 ## Installing a Code Editor
 
@@ -79,12 +45,11 @@ Now that you have Clang++ installed, you can choose a code editor.
 
 For this tutorial, we will be using VS Code, but you can use any code editor you want.
 
-To install VS Code, go to [this link](https://code.visualstudio.com/download).
+Since we're using Scoop, you can install VS Code directly from PowerShell:
 
-Once you're there, install the latest version for your distro. If you're on Arch and you don't see a download option, run this command in your terminal:
-
-```bash
-sudo pacman -S code
+```powershell
+scoop bucket add extras
+scoop install vscode
 ```
 
 Once VS Code is installed, you'll need the C++ extension. Use this keyboard shortcut to open the Extensions panel:

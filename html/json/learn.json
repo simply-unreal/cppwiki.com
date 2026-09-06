@@ -23,6 +23,18 @@
                     "url": "content/learn/chapter%200/lesson 3.html"
                 }
             ]
+        },
+        {
+            "id": 1,
+            "name": "C++ Basics",
+            "items": [
+                {
+                    "id": 0.1,
+                    "name": "Your first C++ program",
+                    "description": "Learn how to create your first C++ program",
+                    "url":"content/learn/chapter%201/lesson 1.html"
+                }
+            ]
         }
     ]
 }
