@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Make an Article - cppwiki</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        html {
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-content">
+
+        <a class="site-logo" href="../../index.html">
+            cppwiki
+        </a>
+
+        <form class="search-form" action="../../index.html" method="get">
+
+            <label class="sr-only" for="search">
+                Search cppwiki
+            </label>
+
+            <div class="search-input-wrapper">
+
+                <span class="search-icon" aria-hidden="true">
+                    ⌕
+                </span>
+
+                <input
+                    id="search"
+                    type="search"
+                    name="q"
+                    placeholder="Search cppwiki"
+                    autocomplete="off"
+                />
+
+            </div>
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+    </div>
+</header>
+
+    <main class="main-content">
+
+        <article class="lesson-page">
+
+            <div class="lesson-meta">
+                <span class="meta-tag">Beginner</span>
+            </div>
+
+            <div class="toc">
+                <h2>Contents</h2>
+                <ol>
+            <li><a href="#how-to-make-an-article">How to Make an Article</a>
+            <ul>
+            <li><a href="#create-the-markdown-file">Create the Markdown file</a>
+            </li>
+            <li><a href="#add-front-matter">Add front matter</a>
+            </li>
+            <li><a href="#write-the-article">Write the article</a>
+            </li>
+            <li><a href="#build-the-html-page">Build the HTML page</a>
+            </li>
+            <li><a href="#publish-the-article">Publish the article</a>
+            </li>
+            </ul>
+            </li>
+                </ol>
+            </div>
+
+            <h1 id="how-to-make-an-article">How to Make an Article</h1>
+            <p>Articles on cppwiki are written in <strong>Markdown</strong> and converted into HTML by
+            <code>build.py</code>. This keeps the source easy to read while producing pages that can
+            be published by the website.</p>
+            <h2 id="create-the-markdown-file">Create the Markdown file</h2>
+            <p>Create a file with the <code>.md</code> extension inside <code>html/content</code>. You can organize
+            related articles in a subdirectory, such as <code>html/content/special</code>.</p>
+            <p>For example, this article is stored at:</p>
+            <div class="code-block">
+                <div class="code-block-header">Text</div>
+    <pre><code>html/content/special/make.md
+</code></pre>
+            </div>
+            <p>The file name becomes the name of the generated page. In this example,
+            <code>make.md</code> becomes <code>make.html</code>.</p>
+            <h2 id="add-front-matter">Add front matter</h2>
+            <p>Front matter goes at the top of the file between two lines containing three
+            hyphens. It sets information about the article:</p>
+            <div class="code-block">
+                <div class="code-block-header">MARKDOWN</div>
+    <pre><code>---
+title: How to Make an Article
+difficulty: Beginner
+---
+</code></pre>
+            </div>
+            <p>The <code>title</code> is used in the page title. If you leave out <code>title</code>, the builder uses the first level
+            one heading or the file name.</p>
+            <h2 id="write-the-article">Write the article</h2>
+            <p>Use a level one heading for the article title and level two headings for its
+            main sections:</p>
+            <div class="code-block">
+                <div class="code-block-header">MARKDOWN</div>
+    <pre><code># Article title
+
+An introduction should explain what the reader will learn.
+
+## First section
+
+Explain the first idea with short paragraphs and examples.
+</code></pre>
+            </div>
+            <p>Markdown supports useful formatting such as <strong>bold text</strong>, <em>italic text</em>,
+            lists, links, tables, and fenced code blocks.</p>
+            <p>For code examples, put the language after the opening backticks:</p>
+            <div class="code-block">
+                <div class="code-block-header">MARKDOWN</div>
+    <pre><code>```cpp
+#include &lt;iostream&gt;
+
+int main() {
+    std::cout &lt;&lt; &quot;Hello, cppwiki!\n&quot;;
+}
+```
+</code></pre>
+            </div>
+            <p>The language name lets the generated page label the code block correctly.</p>
+            <h2 id="build-the-html-page">Build the HTML page</h2>
+            <p>Run <code>build.py</code> from the repository root:</p>
+            <div class="code-block">
+                <div class="code-block-header">Text</div>
+    <pre><code>python build.py
+</code></pre>
+            </div>
+            <p>The script finds every Markdown file in <code>html/content</code>, converts each one, and
+            writes the HTML file next to its source. The output for this article is:</p>
+            <div class="code-block">
+                <div class="code-block-header">Text</div>
+    <pre><code>html/content/special/make.html
+</code></pre>
+            </div>
+            <p>You do not need to write the HTML by hand. Run the builder again whenever you
+            change the Markdown source so the generated page stays up to date.</p>
+            <h2 id="publish-the-article">Publish the article</h2>
+            <p>The next step is to commit to the cppwiki github. Once you have commited your article i will add it the the repository.</p>
+
+        </article>
+
+    </main>
+
+</body>
+</html>
