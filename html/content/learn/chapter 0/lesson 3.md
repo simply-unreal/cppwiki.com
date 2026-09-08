@@ -1,3 +1,8 @@
+---
+title: Installing C++
+difficulty: Beginner
+---
+
 # Installing C++
 
 Now that you know what C++ actually is, we can get started with installing the tools you need to program in it.
