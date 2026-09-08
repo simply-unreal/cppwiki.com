@@ -1,6 +1,6 @@
 ---
 title: auto
-difficulty: Beginner
+difficulty: Intermediate
 ---
 
 # auto
