@@ -5,34 +5,118 @@
             "name": "Getting Started",
             "items": [
                 {
-                    "id": "0.1",
-                    "name": "Introduction to these tutorials",
-                    "description": "Learn how to use and read these tutorials.",
-                    "url": "content/learn/chapter%200/lesson 1.html"
+                    "id": 0.1,
+                    "name": "Introduction to These Tutorials",
+                    "description": "Learn how these tutorials will teach you.",
+                    "url": "/404.html"
                 },
                 {
-                    "id": "0.2",
+                    "id": 0.2,
                     "name": "What is C++?",
-                    "description": "Learn what C++ actually is.",
-                    "url": "content/learn/chapter%200/lesson 2.html"
+                    "description": "Learn what C++ is.",
+                    "url": "/404.html"
                 },
                 {
-                    "id": "0.3",
-                    "name": "Installing C++",
-                    "description": "Learn how to install C++ on your machine.",
-                    "url": "content/learn/chapter%200/lesson 3.html"
+                    "id": 0.3,
+                    "name": "Installing C++ and an IDE",
+                    "description": "Learn how to install the C++ compiler.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 0.4,
+                    "name": "IDE/Compiler Settings",
+                    "description": "Learn what settings to enable and disable in Visual Studio.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 0.4,
+                    "name": "Choosing a Language Standard",
+                    "description": "Learn what C++ is.",
+                    "url": "/404.html"
                 }
             ]
         },
         {
             "id": 1,
-            "name": "C++ Basics",
+            "name": "Basics of C++",
             "items": [
                 {
-                    "id": 0.1,
-                    "name": "Your first C++ program",
-                    "description": "Learn how to create your first C++ program",
-                    "url":"content/learn/chapter%201/lesson 1.html"
+                    "id": 1.1,
+                    "name": "Expressions and Statements",
+                    "description": "Learn what a expression and a statement is.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 1.2,
+                    "name": "Comments",
+                    "description": "Learn comment is and how to use them.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 1.3,
+                    "name": "Variables",
+                    "description": "Learn what a variable is and how to use one.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 1.4,
+                    "name": "Variable Assignment",
+                    "description": "Learn how to give variables values.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 1.5,
+                    "name": "The Basics of <iostream>",
+                    "description": "Learn the absolute basics of iostream.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 1.6,
+                    "name": "Formatting",
+                    "description": "Learn how to format your programs properly.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 1.7,
+                    "name": "Making your first program",
+                    "description": "Learn how to make your first program.",
+                    "url": "/404.html"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "C++ Functions",
+            "items": [
+                {
+                    "id": 2.1,
+                    "name": "Introduction to Functions",
+                    "description": "Learn what a function is.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 2.2,
+                    "name": "Function Return Values",
+                    "description": "Learn what a function return value is.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 2.3,
+                    "name": "Function Parameters and Arguments",
+                    "description": "Learn what a function parameter is and what a function argument is.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 2.4,
+                    "name": "Why Functions are Great",
+                    "description": "Learn why functions exist and why they are great.",
+                    "url": "/404.html"
+                },
+                {
+                    "id": 2.5,
+                    "name": "Local and Global Scope",
+                    "description": "Learn what local and global scope are.",
+                    "url": "/404.html"
                 }
             ]
         }

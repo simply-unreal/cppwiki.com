@@ -5,16 +5,15 @@ difficulty: Beginner
 
 # How to Make an Article
 
-Articles on cppwiki are written in **Markdown** and converted into HTML by
-`build.py`. This keeps the source easy to read while producing pages that can
-be published by the website.
+Articles on cppwiki are made in **Markdown** and turned into HTML by
+`build.py`.
 
 ## Create the Markdown file
 
 Create a file with the `.md` extension inside `html/content`. You can organize
 related articles in a subdirectory, such as `html/content/special`.
 
-For example, this article is stored at:
+As a example this article is stored at:
 
 ```text
 html/content/special/make.md
@@ -35,8 +34,7 @@ difficulty: Beginner
 ---
 ```
 
-The `title` is used in the page title. If you leave out `title`, the builder uses the first level
-one heading or the file name.
+The `title` is used in the page title. If you leave out `title` build.py will make the title the first heading.
 
 ## Write the article
 
@@ -68,17 +66,17 @@ int main() {
 ```
 ````
 
-The language name lets the generated page label the code block correctly.
+The language name is the name on the code block.
 
 ## Build the HTML page
 
-Run `build.py` from the repository root:
+Run `build.py` from the repository root dir:
 
 ```text
 python build.py
 ```
 
-The script finds every Markdown file in `html/content`, converts each one, and
+The script finds every Markdown file in `html/content`, turns each one into HTML, and
 writes the HTML file next to its source. The output for this article is:
 
 ```text
